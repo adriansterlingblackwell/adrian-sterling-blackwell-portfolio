@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adrian Sterling Blackwell</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#030306;--n1:#05071a;--n2:#090d24;--n3:#0e132e;--n4:#141a38;
+  --y:#f5c400;--y2:#ffd640;--o:#f07020;--o2:#c85010;
+  --w:#edeae4;--w2:rgba(237,234,228,.68);--w3:rgba(237,234,228,.36);
+  --m:#445060;--m2:#232f48;
+  --b1:rgba(245,196,0,.07);--b2:rgba(245,196,0,.16);--b3:rgba(245,196,0,.30);
+  --teal:#2ecfa8;--red:#e04848;--blue:#4a9ed8;--green:#3dca80;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--ink);color:var(--w);font-family:'Inter',sans-serif;font-size:14px;line-height:1.7;overflow-x:hidden;min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;background:repeating-linear-gradient(0deg,rgba(0,0,0,.035) 0px,rgba(0,0,0,.035) 1px,transparent 1px,transparent 4px);}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:1;background:radial-gradient(ellipse 75% 75% at 50% 50%,transparent 35%,rgba(3,3,6,.9) 100%);}
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none;}
+.wrap{max-width:1040px;margin:0 auto;padding:0 40px;position:relative;z-index:10;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:500;background:rgba(3,3,6,.95);backdrop-filter:blur(20px) saturate(1.5);border-bottom:1px solid var(--b1);}
+.nav-in{max-width:1040px;margin:0 auto;padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:62px;}
+.nav-wordmark{display:flex;flex-direction:column;line-height:1;}
+.nav-name{font-family:'DM Serif Display',serif;font-size:15px;font-style:italic;color:var(--w);letter-spacing:.01em;}
+.nav-sub{font-family:'Space Mono',monospace;font-size:7px;letter-spacing:.28em;text-transform:uppercase;color:var(--o);margin-top:1px;}
+.nav-tabs{display:flex;}
+.ntab{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.26em;text-transform:uppercase;padding:10px 22px;cursor:pointer;color:var(--m);background:transparent;border:none;border-bottom:2px solid transparent;transition:color .22s,border-color .22s;}
+.ntab:hover{color:var(--w);}
+.ntab.on{color:var(--y);border-bottom-color:var(--y);}
+.nav-r{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.2em;color:var(--m);display:flex;align-items:center;gap:9px;}
+.ndot{width:6px;height:6px;border-radius:50%;background:#3dca80;box-shadow:0 0 10px #3dca80;animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
+/* PANELS */
+.panel{display:none;}
+.panel.on{display:block;animation:rise .4s cubic-bezier(.16,1,.3,1) both;}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+/* SHARED */
+.sec{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.42em;text-transform:uppercase;color:var(--m);margin-bottom:28px;display:flex;align-items:center;gap:16px;}
+.sec::after{content:'';flex:1;height:1px;background:var(--m2);}
+footer{border-top:1px solid var(--b1);padding:30px 0;display:flex;justify-content:space-between;align-items:center;margin-top:60px;}
+.fsig{font-family:'DM Serif Display',serif;font-size:14px;font-style:italic;color:var(--m);}
+.fcopy{font-family:'Space Mono',monospace;font-size:8px;color:var(--m2);letter-spacing:.12em;}
+
+/* ═══════════════════════════════
+   MISSION
+═══════════════════════════════ */
+.mission-wrap{padding:90px 0 60px;position:relative;}
+.mission-glow{position:absolute;top:-60px;left:-140px;width:720px;height:520px;pointer-events:none;
+  background:radial-gradient(ellipse,rgba(240,112,32,.07) 0%,transparent 62%);
+  animation:gpulse 7s ease-in-out infinite;}
+@keyframes gpulse{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
+.kicker{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.42em;text-transform:uppercase;color:var(--o);display:flex;align-items:center;gap:14px;margin-bottom:34px;}
+.kicker::before{content:'';width:36px;height:1px;background:var(--o);}
+
+/* MANIFESTO */
+.manifesto{font-family:'DM Serif Display',serif;font-size:clamp(32px,5.2vw,62px);font-weight:400;line-height:1.12;letter-spacing:-.015em;color:var(--w);max-width:900px;margin-bottom:48px;}
+.manifesto .yl{color:var(--y);}
+.manifesto .or{font-style:italic;color:var(--o);}
+
+/* WHY — the core "why" statement */
+.why{background:var(--n1);border:1px solid var(--b1);border-left:3px solid var(--y);padding:30px 34px;margin-bottom:52px;max-width:760px;}
+.why-lbl{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.3em;text-transform:uppercase;color:var(--y);margin-bottom:14px;}
+.why-body{font-family:'DM Serif Display',serif;font-size:18px;font-style:italic;color:var(--w2);line-height:1.75;}
+
+/* OPERATOR BLOCK */
+.op-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--b1);border:1px solid var(--b1);margin-bottom:56px;}
+.op-l{background:var(--n1);padding:42px 38px;border-right:1px solid var(--b1);}
+.op-l h2{font-family:'DM Serif Display',serif;font-size:28px;font-weight:400;margin-bottom:20px;line-height:1.22;}
+.op-l h2 em{font-style:italic;color:var(--y);}
+.op-l p{font-size:13px;color:var(--w2);line-height:1.92;margin-bottom:14px;}
+.op-r{background:var(--n2);padding:42px 38px;}
+.op-row{display:flex;gap:16px;padding:15px 0;border-bottom:1px solid var(--b1);}
+.op-row:last-child{border-bottom:none;padding-bottom:0;}
+.op-arr{color:var(--y);font-family:'Space Mono',monospace;font-size:11px;flex-shrink:0;margin-top:3px;}
+.op-t{font-size:13px;color:var(--w2);line-height:1.76;}
+.op-t strong{color:var(--y);font-weight:500;}
+
+/* EXECUTION CHAIN */
+.chain-wrap{margin-bottom:56px;}
+.chain-cap{font-family:'DM Serif Display',serif;font-size:13px;font-style:italic;color:var(--m);text-align:center;margin-bottom:20px;}
+.chain{display:flex;border:1px solid var(--b1);}
+.cn{flex:1;min-width:66px;background:var(--n1);border-right:1px solid var(--b1);padding:22px 6px;text-align:center;transition:background .2s;}
+.cn:last-child{border-right:none;}
+.cn:hover{background:var(--n2);}
+.cn.lit{background:var(--n2);border-top:2px solid var(--y);}
+.cn-num{font-family:'Space Mono',monospace;font-size:7px;color:var(--m);margin-bottom:7px;letter-spacing:.12em;}
+.cn-lbl{font-family:'DM Serif Display',serif;font-size:13px;color:var(--w);margin-bottom:5px;}
+.cn.lit .cn-lbl{color:var(--y);}
+.cn-sub{font-family:'Space Mono',monospace;font-size:7px;color:var(--m);line-height:1.55;}
+
+/* READING */
+.reading{display:flex;flex-direction:column;gap:1px;background:var(--b1);border:1px solid var(--b1);margin-bottom:56px;}
+.rbook-row{background:var(--n1);padding:16px 22px;display:flex;align-items:center;justify-content:space-between;transition:background .2s;}
+.rbook-row:hover{background:var(--n2);}
+.rb-title{font-family:'DM Serif Display',serif;font-size:14px;color:var(--w);}
+.rb-auth{font-family:'Space Mono',monospace;font-size:9px;color:var(--m);margin-top:2px;}
+.rb-why{font-family:'Space Mono',monospace;font-size:9px;color:rgba(245,196,0,.65);max-width:360px;text-align:right;line-height:1.6;}
+
+/* ═══════════════════════════════
+   WORK
+═══════════════════════════════ */
+.work-wrap{padding:60px 0;}
+.fbar{display:flex;gap:6px;margin-bottom:36px;flex-wrap:wrap;}
+.fbtn{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.18em;text-transform:uppercase;padding:8px 18px;cursor:pointer;background:transparent;color:var(--m);border:1px solid var(--m2);transition:all .2s;}
+.fbtn:hover{border-color:var(--y);color:var(--y);}
+.fbtn.on{background:var(--y);color:var(--ink);border-color:var(--y);font-weight:700;}
+.proj-list{display:flex;flex-direction:column;gap:1px;background:var(--b1);border:1px solid var(--b1);}
+.pc{background:var(--n1);transition:background .2s;}
+.pc:hover{background:var(--n2);}
+.pc.hidden{display:none;}
+.pc-in{padding:36px;}
+.p-cat{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.26em;text-transform:uppercase;color:var(--o);margin-bottom:10px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.pbadge{font-size:7px;padding:2px 8px;letter-spacing:.1em;}
+.pbadge.pub{background:rgba(61,202,128,.08);border:1px solid rgba(61,202,128,.25);color:#3dca80;}
+.pbadge.int{background:rgba(74,158,216,.08);border:1px solid rgba(74,158,216,.22);color:#4a9ed8;}
+.p-name{font-family:'DM Serif Display',serif;font-size:24px;font-weight:400;color:var(--w);margin-bottom:18px;}
+
+/* OUTCOME BAR */
+.oc{background:rgba(245,196,0,.03);border:1px solid var(--b2);border-left:3px solid var(--y);padding:20px 24px;margin-bottom:18px;}
+.oc-lbl{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.26em;text-transform:uppercase;color:var(--y);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.oc-lbl::before{content:'';width:12px;height:1px;background:var(--y);}
+.oc-items{display:grid;grid-template-columns:1fr 1fr;gap:6px 28px;}
+.oc-i{font-size:12px;color:var(--w2);line-height:1.62;display:flex;gap:10px;align-items:flex-start;}
+.oc-i::before{content:'✓';color:var(--y);font-size:10px;flex-shrink:0;margin-top:3px;font-weight:700;}
+
+.p-desc{font-size:13px;color:var(--m);line-height:1.9;max-width:700px;margin-bottom:16px;}
+.term{background:rgba(0,0,0,.55);border:1px solid var(--b1);border-left:2px solid var(--teal);padding:14px 18px;font-family:'Space Mono',monospace;font-size:9px;line-height:2.0;color:var(--w3);margin-bottom:18px;}
+.k{color:var(--blue);}.vg{color:var(--green);}.vr{color:var(--red);}.va{color:var(--y);}.vc{color:var(--teal);}
+.p-foot{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.tag-row{display:flex;flex-wrap:wrap;gap:5px;}
+.ptag{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border:1px solid;}
+.ptag.b{color:var(--blue);border-color:rgba(74,158,216,.2);}
+.ptag.t{color:var(--teal);border-color:rgba(46,207,168,.18);}
+.ptag.y{color:var(--y);border-color:rgba(245,196,0,.18);}
+.ptag.o{color:var(--o);border-color:rgba(240,112,32,.18);}
+.p-links{display:flex;gap:8px;align-items:center;}
+.plink{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.14em;text-transform:uppercase;padding:7px 16px;border:1px solid;text-decoration:none;transition:all .2s;}
+.plink.gh{color:var(--y);border-color:var(--b2);}
+.plink.gh:hover{background:var(--y);color:var(--ink);}
+
+/* ═══════════════════════════════
+   CASE STUDIES
+═══════════════════════════════ */
+.cases-wrap{padding:60px 0;}
+.case-intro{font-size:13px;color:var(--m);max-width:560px;line-height:1.9;margin-bottom:48px;}
+.case-block{border:1px solid var(--b1);margin-bottom:2px;background:var(--n1);}
+.case-hdr{padding:32px 36px 26px;border-bottom:1px solid var(--b1);display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;}
+.case-num{font-family:'Bebas Neue',sans-serif;font-size:64px;line-height:1;color:rgba(245,196,0,.06);flex-shrink:0;}
+.case-domain{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.26em;text-transform:uppercase;color:var(--o);margin-bottom:8px;}
+.case-title{font-family:'DM Serif Display',serif;font-size:22px;font-weight:400;color:var(--w);margin-bottom:10px;}
+.case-lead{font-size:13px;color:var(--m);max-width:640px;line-height:1.84;}
+.case-body{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--b1);}
+.case-col{background:var(--n2);padding:26px 28px;}
+.cc-lbl{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.24em;text-transform:uppercase;color:var(--m);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--b1);}
+.case-list{list-style:none;}
+.case-list li{font-size:12px;color:var(--w2);padding:5px 0;border-bottom:1px solid rgba(255,255,255,.022);display:flex;gap:10px;align-items:flex-start;line-height:1.62;}
+.case-list li::before{content:'→';color:var(--y);font-size:9px;flex-shrink:0;margin-top:4px;}
+.case-out{padding:22px 36px;background:var(--n3);display:flex;align-items:center;gap:32px;flex-wrap:wrap;border-top:1px solid var(--b1);}
+.co-dec{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:.06em;line-height:1;}
+.co-data{font-family:'Space Mono',monospace;font-size:9.5px;color:var(--m);line-height:2.0;}
+.co-data .hl{color:var(--w2);}
+
+/* ═══════════════════════════════
+   CONTACT
+═══════════════════════════════ */
+.contact-wrap{padding:80px 0;}
+.ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+.ct-left h2{font-family:'DM Serif Display',serif;font-size:44px;font-weight:400;line-height:1.1;margin-bottom:20px;}
+.ct-left h2 em{font-style:italic;color:var(--y);}
+.ct-left p{font-size:13px;color:var(--w2);line-height:1.92;margin-bottom:16px;}
+.avail-block{border:1px solid var(--b1);background:var(--n1);padding:22px 24px;margin-bottom:24px;}
+.avail-row{font-family:'Space Mono',monospace;font-size:10px;color:var(--m);line-height:2.3;}
+.avail-row .lbl{color:var(--y);}
+.clink-list{display:flex;flex-direction:column;gap:1px;background:var(--b1);border:1px solid var(--b1);}
+.clink{background:var(--n1);padding:17px 22px;display:flex;align-items:center;justify-content:space-between;text-decoration:none;color:var(--w);transition:background .2s;}
+.clink:hover{background:var(--n2);}
+.cl-l{display:flex;align-items:center;gap:14px;}
+.cl-ico{width:38px;height:38px;border-radius:4px;background:rgba(245,196,0,.06);border:1px solid var(--b2);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.cl-lbl{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.14em;color:var(--m);text-transform:uppercase;}
+.cl-val{font-size:13px;color:var(--w);margin-top:1px;}
+.cl-arr{font-size:15px;color:var(--y);}
+.svc-list{display:flex;flex-direction:column;gap:1px;background:var(--b1);border:1px solid var(--b1);margin-bottom:28px;}
+.svc{background:var(--n1);padding:17px 22px;display:flex;align-items:center;justify-content:space-between;gap:20px;transition:background .2s;}
+.svc:hover{background:var(--n2);}
+.svc-n{font-family:'DM Serif Display',serif;font-size:14px;color:var(--w);margin-bottom:2px;}
+.svc-d{font-family:'Space Mono',monospace;font-size:8px;color:var(--m);}
+.svc-p{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--y);letter-spacing:.04em;white-space:nowrap;text-align:right;flex-shrink:0;}
+.svc-p small{display:block;font-family:'Space Mono',monospace;font-size:8px;color:var(--m);}
+.rmap{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--b1);border:1px solid var(--b1);}
+.rmap-c{background:var(--n1);padding:22px 20px;}
+.rmap-q{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--m);margin-bottom:6px;}
+.rmap-n{font-family:'DM Serif Display',serif;font-size:14px;color:var(--w);margin-bottom:9px;}
+.rmap-st{display:inline-block;font-family:'Space Mono',monospace;font-size:7px;letter-spacing:.14em;text-transform:uppercase;padding:2px 8px;border:1px solid;margin-bottom:12px;}
+.rmap-st.done{color:var(--green);border-color:rgba(61,202,128,.28);}
+.rmap-st.wip{color:var(--y);border-color:rgba(245,196,0,.28);}
+.rmap-st.plan{color:var(--m);border-color:var(--m2);}
+.rmap-ul{list-style:none;}
+.rmap-ul li{font-family:'Space Mono',monospace;font-size:8px;color:var(--w3);padding:3px 0;border-bottom:1px solid var(--b1);display:flex;gap:7px;}
+.rmap-ul li::before{content:'·';color:var(--y);flex-shrink:0;}
+
+@media(max-width:720px){
+  .op-grid,.ct-grid{grid-template-columns:1fr;}
+  .op-l{border-right:none;border-bottom:1px solid var(--b1);}
+  .case-body,.rmap{grid-template-columns:1fr;}
+  .case-hdr{grid-template-columns:1fr;}
+  .case-num{display:none;}
+  .oc-items{grid-template-columns:1fr;}
+  .chain{overflow-x:auto;}
+  .nav-r{display:none;}
+}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-in">
+    <div class="nav-wordmark">
+      <div class="nav-name">Adrian Sterling Blackwell</div>
+      <div class="nav-sub">Decision Infrastructure</div>
+    </div>
+    <div class="nav-tabs">
+      <button class="ntab on"  onclick="sw('mission',this)">Mission</button>
+      <button class="ntab"     onclick="sw('work',this)">Work</button>
+      <button class="ntab"     onclick="sw('cases',this)">Case Studies</button>
+      <button class="ntab"     onclick="sw('contact',this)">Contact</button>
+    </div>
+    <div class="nav-r"><span class="ndot"></span>Available · Remote / Global</div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════
+     MISSION
+═══════════════════════════════ -->
+<div id="p-mission" class="panel on">
+<div class="wrap">
+<div class="mission-wrap">
+  <div class="mission-glow"></div>
+
+  <div class="kicker">Operator-Builder · Blockchain Compliance · Decision Infrastructure</div>
+
+  <h1 class="manifesto">
+    Signals are not decisions.<br>
+    Decisions are not <span class="yl">execution.</span><br>
+    <span class="or">Infrastructure</span> is what connects them.
+  </h1>
+
+  <div class="why">
+    <div class="why-lbl">Why This Exists</div>
+    <div class="why-body">
+      "Most compliance systems are built for regulators, not operators.
+      They produce reports for someone else to decide.
+      Decision infrastructure is different —
+      the decision is the output, not the input to another meeting."
+    </div>
+  </div>
+
+  <div class="sec">Operator Mindset</div>
+  <div class="op-grid">
+    <div class="op-l">
+      <h2>Analysis does not<br>create <em>outcomes.</em><br>Execution does.</h2>
+      <p>The gap between knowing a risk exists and doing something traceable about it — that gap is where most compliance systems fail. Not because of bad data. Because of missing infrastructure.</p>
+      <p>Infrastructure is the layer that takes a risk signal, resolves it against operational constraints, and produces a decision that can be acted on, audited, and defended in front of a regulator.</p>
+      <p>That is the only work worth doing.</p>
+    </div>
+    <div class="op-r">
+      <div class="op-row"><div class="op-arr">→</div><div class="op-t"><strong>Sanctions matched before settlement occurs.</strong> Not flagged for review after the transaction clears — intercepted before execution, when intervention is still possible.</div></div>
+      <div class="op-row"><div class="op-arr">→</div><div class="op-t"><strong>Investigation evidence assembled automatically.</strong> When a BLOCK fires, the case package already exists. Analysts review structured evidence — not raw data from scratch.</div></div>
+      <div class="op-row"><div class="op-arr">→</div><div class="op-t"><strong>Every decision carries its own reasoning.</strong> Signal → weight → score → decision → reason. Each step preserved. Each step defensible under audit.</div></div>
+      <div class="op-row"><div class="op-arr">→</div><div class="op-t"><strong>Routine decisions removed from analyst workload entirely.</strong> Low-risk volume is cleared automatically. Human judgment reserved for cases that genuinely require it.</div></div>
+      <div class="op-row"><div class="op-arr">→</div><div class="op-t"><strong>Constraint is the design condition.</strong> Built for incomplete data, adversarial signals, time pressure — not ideal laboratory inputs.</div></div>
+    </div>
+  </div>
+
+  <div class="sec">Execution Model</div>
+  <div class="chain-wrap">
+    <div class="chain-cap">The infrastructure layer between information and action</div>
+    <div class="chain">
+      <div class="cn"><div class="cn-num">01</div><div class="cn-lbl">Data</div><div class="cn-sub">On-chain events<br>transactions</div></div>
+      <div class="cn"><div class="cn-num">02</div><div class="cn-lbl">Signal</div><div class="cn-sub">Extraction<br>anomaly detection</div></div>
+      <div class="cn"><div class="cn-num">03</div><div class="cn-lbl">Model</div><div class="cn-sub">Risk frameworks<br>entity attribution</div></div>
+      <div class="cn"><div class="cn-num">04</div><div class="cn-lbl">Risk</div><div class="cn-sub">Weighted scoring<br>threshold logic</div></div>
+      <div class="cn lit"><div class="cn-num">05</div><div class="cn-lbl">Decision</div><div class="cn-sub">BLOCK · REVIEW<br>MONITOR · APPROVE</div></div>
+      <div class="cn"><div class="cn-num">06</div><div class="cn-lbl">Execution</div><div class="cn-sub">System output<br>case creation</div></div>
+      <div class="cn"><div class="cn-num">07</div><div class="cn-lbl">Feedback</div><div class="cn-sub">Outcome loop<br>iteration</div></div>
+    </div>
+  </div>
+
+  <div class="sec">Influences</div>
+  <div class="reading">
+    <div class="rbook-row">
+      <div><div class="rb-title">The Black Swan</div><div class="rb-auth">Nassim Nicholas Taleb</div></div>
+      <div class="rb-why">Shaped how risk systems are designed here — for asymmetric outcomes, not normal distributions.</div>
+    </div>
+    <div class="rbook-row">
+      <div><div class="rb-title">Thinking in Systems</div><div class="rb-auth">Donella Meadows</div></div>
+      <div class="rb-why">Every compliance pipeline is a system. Feedback loops determine whether it evolves or fails.</div>
+    </div>
+    <div class="rbook-row">
+      <div><div class="rb-title">Superforecasting</div><div class="rb-auth">Philip Tetlock & Dan Gardner</div></div>
+      <div class="rb-why">Calibrated confidence — the foundation of any decision that must survive scrutiny.</div>
+    </div>
+    <div class="rbook-row">
+      <div><div class="rb-title">Flash Boys</div><div class="rb-auth">Michael Lewis</div></div>
+      <div class="rb-why">Latency is not a technical concern. It is an operational advantage or a liability.</div>
+    </div>
+    <div class="rbook-row">
+      <div><div class="rb-title">Poor Charlie's Almanack</div><div class="rb-auth">Charles T. Munger</div></div>
+      <div class="rb-why">Mental models over memorized rules. The foundation of constraint-based decision logic.</div>
+    </div>
+    <div class="rbook-row">
+      <div><div class="rb-title">Against the Gods</div><div class="rb-auth">Peter L. Bernstein</div></div>
+      <div class="rb-why">Risk is not eliminated — it is measured, priced, and managed. This is the operating condition.</div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="fsig">Adrian Sterling Blackwell</div>
+    <div class="fcopy">Decision Infrastructure · Operator-Builder · Remote / Global</div>
+  </footer>
+</div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════
+     WORK
+═══════════════════════════════ -->
+<div id="p-work" class="panel">
+<div class="wrap">
+<div class="work-wrap">
+  <div class="sec">Selected Work</div>
+  <div class="fbar">
+    <button class="fbtn on" onclick="fp('all',this)">All</button>
+    <button class="fbtn" onclick="fp('blockchain',this)">Blockchain</button>
+    <button class="fbtn" onclick="fp('fintech',this)">Fintech</button>
+    <button class="fbtn" onclick="fp('quant',this)">Quant</button>
+    <button class="fbtn" onclick="fp('ml',this)">ML / AI</button>
+  </div>
+  <div class="proj-list">
+
+    <!-- 1 -->
+    <div class="pc" data-cat="blockchain fintech"><div class="pc-in">
+      <div class="p-cat">Blockchain Compliance · Internal Research System <span class="pbadge int">Internal Research</span></div>
+      <div class="p-name">ComplianceNode — Core Engine</div>
+      <div class="oc">
+        <div class="oc-lbl">Operational Outcomes</div>
+        <div class="oc-items">
+          <div class="oc-i">Sanctions exposure detected before settlement occurs</div>
+          <div class="oc-i">High-risk transactions blocked before execution</div>
+          <div class="oc-i">Investigation evidence assembled — zero analyst setup time</div>
+          <div class="oc-i">Every decision auditable — full signal chain preserved</div>
+          <div class="oc-i">Routine triage eliminated from compliance workload</div>
+          <div class="oc-i">Explainable BLOCK output — defensible under regulatory review</div>
+        </div>
+      </div>
+      <div class="p-desc">Full blockchain compliance intelligence engine. Ingests real Ethereum transactions via RPC, runs entity enrichment, OFAC/SDN sanctions screening, function selector analysis, ERC-20 approval intelligence, and 18+ weighted risk signals — producing structured, traceable, explainable decisions with automatic investigation case creation.</div>
+      <div class="term">
+        <span class="k">sanctions:</span> 0xabcd...ef12 → <span class="vr">OFAC-SDN · CYBER2 · confidence: HIGH</span><br>
+        <span class="k">signals:</span> [<span class="vr">SANCTIONED_SOURCE_ADDRESS</span>, <span class="va">HIGH_VALUE_TRANSACTION</span>, <span class="va">RAPID_ACTIVITY_PATTERN</span>]<br>
+        <span class="k">risk_score:</span> <span class="vr">100.00</span> · <span class="k">decision:</span> <span class="vr">BLOCK</span> · <span class="k">latency:</span> <span class="vg">18ms</span><br>
+        <span class="vc">→ investigation: AUTO-OPENED · audit: COMPLETE · analyst_setup_time: 0</span>
+      </div>
+      <div class="p-foot">
+        <div class="tag-row"><span class="ptag b">Python</span><span class="ptag b">FastAPI</span><span class="ptag b">SQLAlchemy</span><span class="ptag b">PostgreSQL</span><span class="ptag b">Redis</span><span class="ptag t">Ethereum RPC</span><span class="ptag t">OFAC Sanctions</span><span class="ptag y">Docker</span><span class="ptag y">Pydantic</span></div>
+        <div class="p-links"><a class="plink gh" href="https://github.com/adriansterlingblackwell" target="_blank">GitHub →</a></div>
+      </div>
+    </div></div>
+
+    <!-- 2 -->
+    <div class="pc" data-cat="blockchain fintech"><div class="pc-in">
+      <div class="p-cat">Compliance Dashboard · Full-Stack · Internal Research System <span class="pbadge int">Internal Research</span></div>
+      <div class="p-name">ComplianceNode — Intelligence Core</div>
+      <div class="oc">
+        <div class="oc-lbl">Operational Outcomes</div>
+        <div class="oc-items">
+          <div class="oc-i">Compliance posture readable in real time — no manual data pull</div>
+          <div class="oc-i">High-risk wallets surfaced with sanctions, mixer, darknet flags</div>
+          <div class="oc-i">Investigation cases visible with recommended action and assigned team</div>
+          <div class="oc-i">Live market intelligence embedded directly in compliance workflow</div>
+          <div class="oc-i">System health score gives instant operational posture reading</div>
+          <div class="oc-i">Full audit timeline available for regulatory and internal review</div>
+        </div>
+      </div>
+      <div class="p-desc">Full-stack compliance command center. React + TypeScript frontend with live BTC/ETH/SOL/BNB/XRP tickers (3s refresh), wallet exposure intelligence, Recharts risk visualizations, investigation case management, compliance alert system, and timestamped audit timeline — connected to FastAPI + PostgreSQL backend.</div>
+      <div class="term">
+        <span class="k">health:</span> <span class="vg">87%</span> · <span class="k">transactions:</span> <span class="vg">2,341</span> · <span class="k">avg_risk:</span> <span class="va">34.2</span><br>
+        <span class="k">wallet.0xabcd:</span> <span class="vr">CRITICAL · sanctions: TRUE · mixer: TRUE · darknet: TRUE</span><br>
+        <span class="k">market:</span> <span class="va">BTC $102,841 · ETH $3,912 · SOL $178.4</span> <span class="vc">[live · 3s refresh]</span>
+      </div>
+      <div class="p-foot">
+        <div class="tag-row"><span class="ptag b">React</span><span class="ptag b">TypeScript</span><span class="ptag b">Vite</span><span class="ptag b">Tailwind</span><span class="ptag b">Axios</span><span class="ptag t">Recharts</span><span class="ptag t">Wallet Intelligence</span><span class="ptag o">FastAPI</span><span class="ptag o">PostgreSQL</span></div>
+        <div class="p-links"><a class="plink gh" href="https://github.com/adriansterlingblackwell" target="_blank">GitHub →</a></div>
+      </div>
+    </div></div>
+
+    <!-- 3 -->
+    <div class="pc" data-cat="fintech"><div class="pc-in">
+      <div class="p-cat">Decision Infrastructure · Event-Driven Systems <span class="pbadge pub">Public</span></div>
+      <div class="p-name">EDDL v1 — Event-Driven Decision Layer</div>
+      <div class="oc">
+        <div class="oc-lbl">Operational Outcomes</div>
+        <div class="oc-items">
+          <div class="oc-i">Every financial decision traceable — ID, timestamp, reason, confidence</div>
+          <div class="oc-i">Explainable output — reasoning survives regulatory review</div>
+          <div class="oc-i">14ms decision latency — production-ready for real-time fintech</div>
+          <div class="oc-i">No single point of audit failure — distributed architecture</div>
+        </div>
+      </div>
+      <div class="p-desc">Event-driven decision traceability platform for fintech systems. Designed for auditability, explainability, and distributed decision flows — production architecture for environments where every decision must be defended.</div>
+      <div class="term">
+        <span class="k">event:</span> TRANSACTION_SUBMITTED · <span class="k">id:</span> <span class="va">EVT-20250606-0047</span><br>
+        <span class="k">decision:</span> <span class="vg">APPROVE</span> · <span class="k">confidence:</span> <span class="vg">0.91</span> · <span class="k">latency:</span> <span class="vg">14ms</span><br>
+        <span class="vc">→ reasoning_chain: PRESERVED · audit: COMPLETE · distributed: TRUE</span>
+      </div>
+      <div class="p-foot">
+        <div class="tag-row"><span class="ptag b">Python</span><span class="ptag t">Event-Driven</span><span class="ptag t">XAI</span><span class="ptag t">Distributed</span><span class="ptag y">Decision Traceability</span></div>
+        <div class="p-links"><a class="plink gh" href="https://github.com/adriansterlingblackwell/eddl-v1-fintech" target="_blank">GitHub →</a></div>
+      </div>
+    </div></div>
+
+    <!-- 4 -->
+    <div class="pc" data-cat="fintech quant"><div class="pc-in">
+      <div class="p-cat">Financial Intelligence · Scenario Analysis <span class="pbadge pub">Public</span></div>
+      <div class="p-name">Operation Cold Ledger</div>
+      <div class="oc">
+        <div class="oc-lbl">Operational Outcomes</div>
+        <div class="oc-items">
+          <div class="oc-i">Anomalous patterns identified that rule-based systems miss</div>
+          <div class="oc-i">Structured risk output — explainable assessments, not raw scores</div>
+          <div class="oc-i">Adversarial scenario testing — built for noisy, manipulated data</div>
+          <div class="oc-i">Investigation-ready intelligence delivered, not analyst prompts</div>
+        </div>
+      </div>
+      <div class="p-desc">Scenario-driven financial intelligence platform with structured anomaly analysis. Designed for adversarial signal environments — tests what breaks when data is noisy, delayed, or deliberately distorted.</div>
+      <div class="term">
+        <span class="k">scenario:</span> high_frequency_cross_border · <span class="k">data:</span> <span class="va">ADVERSARIAL</span><br>
+        <span class="k">anomaly_score:</span> <span class="vr">0.87</span> · <span class="k">pattern:</span> <span class="vr">VELOCITY_BURST + CROSS_BORDER_ACTIVITY</span><br>
+        <span class="vc">→ structured_output: explainable · investigation_ready: TRUE</span>
+      </div>
+      <div class="p-foot">
+        <div class="tag-row"><span class="ptag b">Python</span><span class="ptag b">Jupyter</span><span class="ptag b">Pandas</span><span class="ptag t">Anomaly Detection</span><span class="ptag y">Financial Intelligence</span></div>
+        <div class="p-links"><a class="plink gh" href="https://github.com/adriansterlingblackwell/Operation-Cold-Ledger" target="_blank">GitHub →</a></div>
+      </div>
+    </div></div>
+
+    <!-- 5 -->
+    <div class="pc" data-cat="quant"><div class="pc-in">
+      <div class="p-cat">Quantitative Finance · Strategy Evaluation <span class="pbadge pub">Public</span></div>
+      <div class="p-name">Quant Market Simulator</div>
+      <div class="oc">
+        <div class="oc-lbl">Operational Outcomes</div>
+        <div class="oc-items">
+          <div class="oc-i">Strategy performance evaluated before capital is deployed</div>
+          <div class="oc-i">Risk-constrained — tests exposure limits, not just returns</div>
+          <div class="oc-i">Stress tests dynamic conditions, not historical averages</div>
+          <div class="oc-i">Strategy-agnostic — reproducible evaluation across any approach</div>
+        </div>
+      </div>
+      <div class="p-desc">Modular quantitative simulation framework for market behavior modeling, strategy evaluation, and risk stress-testing. Built for environments where backtest returns are insufficient without knowing what breaks under pressure.</div>
+      <div class="term">
+        <span class="k">strategy:</span> momentum_alpha_v2 · <span class="k">period:</span> <span class="va">2020–2024</span><br>
+        <span class="k">sharpe:</span> <span class="vg">1.84</span> · <span class="k">max_drawdown:</span> <span class="vr">-12.3%</span> · <span class="k">stress_test:</span> <span class="vg">PASSED</span><br>
+        <span class="vc">→ risk_constrained: TRUE · reproducible: TRUE · strategy_agnostic: TRUE</span>
+      </div>
+      <div class="p-foot">
+        <div class="tag-row"><span class="ptag b">Python</span><span class="ptag b">Pandas</span><span class="ptag b">NumPy</span><span class="ptag b">Matplotlib</span><span class="ptag t">Backtesting</span><span class="ptag t">Risk Modeling</span><span class="ptag y">Stress Testing</span></div>
+        <div class="p-links"><a class="plink gh" href="https://github.com/adriansterlingblackwell/quant-market-simulator" target="_blank">GitHub →</a></div>
+      </div>
+    </div></div>
+
+    <!-- 6 -->
+    <div class="pc" data-cat="ml quant"><div class="pc-in">
+      <div class="p-cat">ML Research · Financial Signal Intelligence <span class="pbadge pub">Public</span></div>
+      <div class="p-name">TorchLedger</div>
+      <div class="oc">
+        <div class="oc-lbl">Research Direction</div>
+        <div class="oc-items">
+          <div class="oc-i">Rule-based scoring reaches a ceiling — TorchLedger investigates what neural architectures see in transaction-level data that weighted signals miss</div>
+          <div class="oc-i">Bridges statistical risk modeling with deep learning pattern recognition</div>
+          <div class="oc-i">Foundation layer for AI compliance reasoning that remains auditable</div>
+          <div class="oc-i">Applied PyTorch research on ledger-level behavioral extraction</div>
+        </div>
+      </div>
+      <div class="p-desc">PyTorch-based research framework applying deep learning to financial ledger signal extraction. The core question: weighted signal systems are effective but bounded — they score what they are told to look for. TorchLedger investigates what neural architectures find that rule-based systems cannot.</div>
+      <div class="term">
+        <span class="k">framework:</span> PyTorch · <span class="k">domain:</span> <span class="va">Financial Ledger Signal Intelligence</span><br>
+        <span class="k">question:</span> <span class="vc">what do neural architectures see that weighted signals miss?</span><br>
+        <span class="vc">→ target: auditable ML compliance output · explainable at inference</span>
+      </div>
+      <div class="p-foot">
+        <div class="tag-row"><span class="ptag b">Python</span><span class="ptag b">PyTorch</span><span class="ptag t">Deep Learning</span><span class="ptag t">Signal Extraction</span><span class="ptag y">Financial ML</span></div>
+        <div class="p-links"><a class="plink gh" href="https://github.com/adriansterlingblackwell/torchledger" target="_blank">GitHub →</a></div>
+      </div>
+    </div></div>
+
+  </div>
+  <footer>
+    <div class="fsig">Adrian Sterling Blackwell</div>
+    <div class="fcopy">6 Systems · 4 Public Repositories · Remote / Global</div>
+  </footer>
+</div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════
+     CASE STUDIES
+═══════════════════════════════ -->
+<div id="p-cases" class="panel">
+<div class="wrap">
+<div class="cases-wrap">
+  <div class="sec">Case Studies</div>
+  <p class="case-intro">How decision infrastructure handles real operational scenarios. Each case: problem → system response → outcome. Not what the system does — what happens as a result of it.</p>
+
+  <div class="case-block">
+    <div class="case-hdr">
+      <div>
+        <div class="case-domain">Sanctions Screening</div>
+        <div class="case-title">Sanctioned Wallet Detected Before Settlement</div>
+        <div class="case-lead">A transaction arrives from an unknown wallet. The amount is significant. Standard rule-based systems see a normal transfer. The compliance system sees an OFAC match — and acts before execution.</div>
+      </div>
+      <div class="case-num">01</div>
+    </div>
+    <div class="case-body">
+      <div class="case-col"><div class="cc-lbl">Problem</div><ul class="case-list"><li>Transaction from wallet with no prior system history</li><li>Amount: $245,000 USDT — above high-value threshold</li><li>Destination: unknown protocol contract</li><li>Rule-based system: no blocklist match, no country flag</li><li>Without infrastructure: transaction clears unreviewed</li></ul></div>
+      <div class="case-col"><div class="cc-lbl">System Response</div><ul class="case-list"><li>Address type confirmed: SMART_CONTRACT via bytecode inspection</li><li>Sanctions match: OFAC-SDN · program: CYBER2 · confidence: HIGH</li><li>Entity resolved: known mixer infrastructure · risk_level: CRITICAL</li><li>Signals extracted: SANCTIONED_SOURCE_ADDRESS · HIGH_VALUE_TRANSACTION · RAPID_ACTIVITY_PATTERN</li><li>Risk score: 100.00 / 100 — decision generated in 18ms</li></ul></div>
+      <div class="case-col"><div class="cc-lbl">Outcome</div><ul class="case-list"><li>Decision: BLOCK — before settlement</li><li>Investigation case auto-created with full evidence package</li><li>Audit trail complete — signal chain, reason, timestamp preserved</li><li>Analyst received structured case — not a flag to investigate from scratch</li><li>Analyst setup time: zero</li></ul></div>
+    </div>
+    <div class="case-out">
+      <div class="co-dec" style="color:var(--red)">BLOCK</div>
+      <div class="co-data"><span class="hl">risk_score:</span> 100.00 · <span class="hl">latency:</span> 18ms · <span class="hl">sanctions:</span> OFAC-SDN<br><span class="hl">investigation:</span> AUTO-OPENED · <span class="hl">audit:</span> COMPLETE · <span class="hl">analyst_setup_time:</span> 0</div>
+    </div>
+  </div>
+
+  <div class="case-block">
+    <div class="case-hdr">
+      <div>
+        <div class="case-domain">Behavioral Anomaly Detection</div>
+        <div class="case-title">Rapid Activity Pattern Routes Five Transactions to Review</div>
+        <div class="case-lead">Five transactions in three minutes. Each individually below alert thresholds. The pattern — not the amount — is the signal. Rule-based systems clear all five. Decision infrastructure routes to review.</div>
+      </div>
+      <div class="case-num">02</div>
+    </div>
+    <div class="case-body">
+      <div class="case-col"><div class="cc-lbl">Problem</div><ul class="case-list"><li>Wallet submits 5 transactions in 3 minutes</li><li>Each: $8,000–$12,000 — below individual alert thresholds</li><li>Destinations: multiple different contracts, several unknown</li><li>Rule-based result: no alerts triggered on any single transaction</li><li>Pattern consistent with structuring behavior</li></ul></div>
+      <div class="case-col"><div class="cc-lbl">System Response</div><ul class="case-list"><li>Behavior engine: RAPID_ACTIVITY_PATTERN — 5 tx in &lt;5 min window detected</li><li>Function selector: UNKNOWN_CONTRACT_FUNCTION on 3 of 5 destinations</li><li>Bridge detection: BRIDGE_INTERACTION flagged on transaction 4</li><li>Combo logic: bridge + unknown function = +15 additional risk applied</li><li>Aggregate risk score: 70 — elevated, not critical</li></ul></div>
+      <div class="case-col"><div class="cc-lbl">Outcome</div><ul class="case-list"><li>Decision: MANUAL_REVIEW — routed to compliance analyst</li><li>Case created: velocity data, contract analysis, bridge exposure packaged</li><li>All 5 transactions in one structured case — no reconstruction needed</li><li>Pattern escalated for enhanced monitoring on wallet</li><li>Analyst reviews evidence — does not build it</li></ul></div>
+    </div>
+    <div class="case-out">
+      <div class="co-dec" style="color:var(--o)">MANUAL_REVIEW</div>
+      <div class="co-data"><span class="hl">risk_score:</span> 70 · <span class="hl">signals:</span> RAPID_ACTIVITY_PATTERN · BRIDGE_INTERACTION · UNKNOWN_CONTRACT_FUNCTION<br><span class="hl">case:</span> 5 transactions packaged · <span class="hl">analyst_mode:</span> REVIEW, NOT RECONSTRUCT</div>
+    </div>
+  </div>
+
+  <div class="case-block">
+    <div class="case-hdr">
+      <div>
+        <div class="case-domain">Token Approval Intelligence</div>
+        <div class="case-title">Unlimited Token Approval to High-Risk Entity Intercepted</div>
+        <div class="case-lead">A wallet approves unlimited ERC-20 spend to an unknown contract. Standard wallets show a normal approval. Decision infrastructure resolves the spender to a high-risk entity and intercepts before the approval executes on-chain.</div>
+      </div>
+      <div class="case-num">03</div>
+    </div>
+    <div class="case-body">
+      <div class="case-col"><div class="cc-lbl">Problem</div><ul class="case-list"><li>Transaction: ERC-20 approve() function detected</li><li>Spender: unknown contract address</li><li>Approval amount: uint256 max — unlimited spend permission</li><li>No prior wallet flags in system</li><li>Without infrastructure: unlimited access granted to a high-risk contract</li></ul></div>
+      <div class="case-col"><div class="cc-lbl">System Response</div><ul class="case-list"><li>Function selector decoded: approve(address,uint256) confirmed</li><li>Approval intelligence: unlimited approval amount detected</li><li>Spender resolved: HIGH_RISK_DESTINATION_ENTITY · risk_level: HIGH</li><li>Signal: CRITICAL_APPROVAL_EXPOSURE fired — unlimited + high-risk spender</li><li>Combo: CRITICAL_DESTINATION_ENTITY + TOKEN_APPROVAL = +20 additional risk</li></ul></div>
+      <div class="case-col"><div class="cc-lbl">Outcome</div><ul class="case-list"><li>Decision: BLOCK — before on-chain execution</li><li>Investigation case: spender intelligence, entity data, approval risk packaged</li><li>Reasoning chain: FUNCTION → ENTITY → SIGNAL → SCORE → DECISION — complete</li><li>Compliance team informed with full context</li><li>On-chain approval prevented</li></ul></div>
+    </div>
+    <div class="case-out">
+      <div class="co-dec" style="color:var(--red)">BLOCK</div>
+      <div class="co-data"><span class="hl">signal:</span> CRITICAL_APPROVAL_EXPOSURE · <span class="hl">approval:</span> UNLIMITED · <span class="hl">spender_risk:</span> HIGH<br><span class="hl">reasoning_chain:</span> FUNCTION → ENTITY → SIGNAL → SCORE → DECISION · <span class="hl">on_chain_prevented:</span> TRUE</div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="fsig">Adrian Sterling Blackwell</div>
+    <div class="fcopy">ComplianceNode · 3 Operational Case Studies</div>
+  </footer>
+</div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════
+     CONTACT
+═══════════════════════════════ -->
+<div id="p-contact" class="panel">
+<div class="wrap">
+<div class="contact-wrap">
+  <div class="sec">Engage</div>
+  <div class="ct-grid">
+    <div class="ct-left">
+      <h2>Let's build<br>something <em>real.</em></h2>
+      <p>Compliance systems built for operators — not regulators. Infrastructure that produces decisions, not reports that require another meeting to act on.</p>
+      <p>Available for engagements where the work matters — blockchain compliance, decision infrastructure, financial risk intelligence, full-stack operational systems.</p>
+      <div class="avail-block">
+        <div class="avail-row">
+          <span class="lbl">STATUS</span> &nbsp;·&nbsp; Available for engagements<br>
+          <span class="lbl">LOCATION</span> &nbsp;·&nbsp; Remote / Global · Open to US<br>
+          <span class="lbl">MODEL</span> &nbsp;·&nbsp; Async-first · Flexible timezone<br>
+          <span class="lbl">RESPONSE</span> &nbsp;·&nbsp; Within 24 hours
+        </div>
+      </div>
+      <div class="clink-list">
+        <a class="clink" href="mailto:adriansterlingblackwell@gmail.com"><div class="cl-l"><div class="cl-ico">✉</div><div><div class="cl-lbl">Email</div><div class="cl-val">adriansterlingblackwell@gmail.com</div></div></div><div class="cl-arr">→</div></a>
+        <a class="clink" href="https://github.com/adriansterlingblackwell" target="_blank"><div class="cl-l"><div class="cl-ico">⌥</div><div><div class="cl-lbl">GitHub</div><div class="cl-val">github.com/adriansterlingblackwell</div></div></div><div class="cl-arr">→</div></a>
+        <a class="clink" href="https://www.linkedin.com/in/adrian-sterling-blackwell-6431b7407/" target="_blank"><div class="cl-l"><div class="cl-ico">in</div><div><div class="cl-lbl">LinkedIn</div><div class="cl-val">adrian-sterling-blackwell</div></div></div><div class="cl-arr">→</div></a>
+        <a class="clink" href="https://medium.com/@adriansterlingblackwell" target="_blank"><div class="cl-l"><div class="cl-ico">M</div><div><div class="cl-lbl">Medium</div><div class="cl-val">@adriansterlingblackwell</div></div></div><div class="cl-arr">→</div></a>
+      </div>
+    </div>
+    <div>
+      <div class="sec" style="margin-bottom:18px;">Services</div>
+      <div class="svc-list" style="margin-bottom:28px;">
+        <div class="svc"><div><div class="svc-n">Compliance System Build</div><div class="svc-d">End-to-end blockchain compliance pipeline</div></div><div class="svc-p">$50–85<small>/ hour</small></div></div>
+        <div class="svc"><div><div class="svc-n">Risk Engine Design</div><div class="svc-d">Weighted signals, decision logic, XAI output</div></div><div class="svc-p">$45–75<small>/ hour</small></div></div>
+        <div class="svc"><div><div class="svc-n">Sanctions Screening Integration</div><div class="svc-d">OFAC / SDN / EU / UN registry pipeline</div></div><div class="svc-p">$50–80<small>/ hour</small></div></div>
+        <div class="svc"><div><div class="svc-n">Full-Stack Compliance Dashboard</div><div class="svc-d">React + FastAPI operational command center</div></div><div class="svc-p">$45–70<small>/ hour</small></div></div>
+        <div class="svc"><div><div class="svc-n">Architecture Consulting</div><div class="svc-d">System design, pipeline review, latency analysis</div></div><div class="svc-p">Rate on request</div></div>
+      </div>
+      <div class="sec" style="margin-bottom:18px;">2026 Roadmap</div>
+      <div class="rmap">
+        <div class="rmap-c"><div class="rmap-q">Q2 2026</div><div class="rmap-n">ComplianceNode</div><div class="rmap-st done">In Progress</div><ul class="rmap-ul"><li>Core Engine</li><li>Intelligence Core</li><li>TorchLedger</li></ul></div>
+        <div class="rmap-c"><div class="rmap-q">Q3 2026</div><div class="rmap-n">Data Layer</div><div class="rmap-st wip">Planned</div><ul class="rmap-ul"><li>Entity registry</li><li>Bridge intelligence</li><li>Multi-chain</li></ul></div>
+        <div class="rmap-c"><div class="rmap-q">Q4 2026</div><div class="rmap-n">AI Intelligence</div><div class="rmap-st plan">Planned</div><ul class="rmap-ul"><li>AI risk narratives</li><li>LLM reasoning</li><li>OSINT engine</li></ul></div>
+        <div class="rmap-c"><div class="rmap-q">2027</div><div class="rmap-n">Platform</div><div class="rmap-st plan">Vision</div><ul class="rmap-ul"><li>Adversarial platform</li><li>Cross-chain</li><li>Analyst workspace</li></ul></div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="fsig">Adrian Sterling Blackwell</div>
+    <div class="fcopy">adriansterlingblackwell@gmail.com · Decision Infrastructure</div>
+  </footer>
+</div>
+</div>
+</div>
+
+<script>
+/* TAB SWITCH */
+function sw(name,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.ntab').forEach(b=>b.classList.remove('on'));
+  document.getElementById('p-'+name).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+/* FILTER */
+function fp(cat,btn){
+  document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.pc').forEach(c=>{
+    c.classList.toggle('hidden',cat!=='all'&&!(c.dataset.cat||'').includes(cat));
+  });
+}
+
+/* CANVAS BACKGROUND */
+(function(){
+  const cv=document.getElementById('bg');
+  const cx=cv.getContext('2d');
+  let W,H,pts=[],frame=0;
+
+  function resize(){
+    W=cv.width=window.innerWidth;
+    H=cv.height=window.innerHeight;
+  }
+
+  function init(){
+    pts=[];
+    const n=Math.min(Math.floor(W*H/9000),120);
+    for(let i=0;i<n;i++){
+      const isOrange=Math.random()<.14;
+      pts.push({
+        x:Math.random()*W, y:Math.random()*H,
+        vx:(Math.random()-.5)*.16, vy:(Math.random()-.5)*.16,
+        r:Math.random()*1.6+.5,
+        op:Math.random()*.45+.12,
+        po:Math.random()*Math.PI*2,
+        color:isOrange?[240,112,32]:[245,196,0]
+      });
+    }
+  }
+
+  function draw(){
+    frame++;
+    cx.clearRect(0,0,W,H);
+
+    /* base gradient */
+    const bg=cx.createRadialGradient(W*.5,H*.38,0,W*.5,H*.38,Math.max(W,H)*.8);
+    bg.addColorStop(0,'rgba(10,14,36,.99)');
+    bg.addColorStop(.6,'rgba(6,8,22,1)');
+    bg.addColorStop(1,'rgba(3,3,6,1)');
+    cx.fillStyle=bg; cx.fillRect(0,0,W,H);
+
+    /* orange glow top-left */
+    const g1=cx.createRadialGradient(W*.04,H*.06,0,W*.04,H*.06,W*.52);
+    g1.addColorStop(0,'rgba(240,112,32,.06)');
+    g1.addColorStop(1,'rgba(0,0,0,0)');
+    cx.fillStyle=g1; cx.fillRect(0,0,W,H);
+
+    /* yellow glow bottom-right */
+    const g2=cx.createRadialGradient(W*.96,H*.94,0,W*.96,H*.94,W*.48);
+    g2.addColorStop(0,'rgba(245,196,0,.045)');
+    g2.addColorStop(1,'rgba(0,0,0,0)');
+    cx.fillStyle=g2; cx.fillRect(0,0,W,H);
+
+    /* slow navy center bloom */
+    const bloom=.5+.5*Math.sin(frame*.006);
+    const g3=cx.createRadialGradient(W*.5,H*.44,0,W*.5,H*.44,W*.38);
+    g3.addColorStop(0,`rgba(60,90,200,${.04*bloom})`);
+    g3.addColorStop(1,'rgba(0,0,0,0)');
+    cx.fillStyle=g3; cx.fillRect(0,0,W,H);
+
+    /* connections */
+    for(let i=0;i<pts.length;i++){
+      for(let j=i+1;j<pts.length;j++){
+        const dx=pts[i].x-pts[j].x, dy=pts[i].y-pts[j].y;
+        const d=Math.sqrt(dx*dx+dy*dy);
+        if(d<140){
+          const a=(1-d/140)*.10;
+          cx.beginPath();
+          cx.strokeStyle=`rgba(245,196,0,${a})`;
+          cx.lineWidth=.5;
+          cx.moveTo(pts[i].x,pts[i].y);
+          cx.lineTo(pts[j].x,pts[j].y);
+          cx.stroke();
+        }
+      }
+    }
+
+    /* particles */
+    pts.forEach(p=>{
+      const pulse=.55+.45*Math.sin(frame*.018+p.po);
+      const [r,g,b]=p.color;
+      /* glow halo */
+      cx.beginPath();
+      cx.arc(p.x,p.y,p.r*3.5,0,Math.PI*2);
+      cx.fillStyle=`rgba(${r},${g},${b},${p.op*.14*pulse})`;
+      cx.fill();
+      /* core */
+      cx.beginPath();
+      cx.arc(p.x,p.y,p.r*pulse,0,Math.PI*2);
+      cx.fillStyle=`rgba(${r},${g},${b},${p.op*pulse})`;
+      cx.fill();
+      /* move */
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<-20)p.x=W+20;
+      if(p.x>W+20)p.x=-20;
+      if(p.y<-20)p.y=H+20;
+      if(p.y>H+20)p.y=-20;
+    });
+
+    /* slow horizontal scan sweep */
+    const sy=(H*((frame*.0025)%1));
+    const sg=cx.createLinearGradient(0,sy-80,0,sy+80);
+    sg.addColorStop(0,'rgba(245,196,0,0)');
+    sg.addColorStop(.5,'rgba(245,196,0,.014)');
+    sg.addColorStop(1,'rgba(245,196,0,0)');
+    cx.fillStyle=sg; cx.fillRect(0,sy-80,W,160);
+
+    requestAnimationFrame(draw);
+  }
+
+  resize(); init(); draw();
+  window.addEventListener('resize',()=>{resize();init();});
+})();
+</script>
+</body>
+</html>
